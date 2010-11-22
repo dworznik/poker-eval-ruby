@@ -1,4 +1,4 @@
-`tar --strip-components 1 -xzvf sources/poker-eval-138.0.tar.gz -C poker-eval`
+`tar --strip-components 1 -xkzvf sources/poker-eval-138.0.tar.gz -C poker-eval`
 
 spec = Gem::Specification.new do |s|
   s.name = 'pokereval'
