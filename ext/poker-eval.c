@@ -5,6 +5,7 @@
 
 // Defining a space for information and references about the module to be stored internally
 VALUE ExtPokerEval = Qnil;
+VALUE PokerEvalResult = Qnil;
 
 // Prototype for the initialization method - Ruby calls this, not you
 void Init_extpokereval();
@@ -56,6 +57,41 @@ int to_string_array(char* dest[], VALUE orig_arr) {
     dest[i] = RSTRING_PTR(orig_str);
   }
   return len;
+}
+
+enum_result_t holdem(char* r_pockets, VALUE r_board) {
+	int i;
+	char* str_pockets[ENUM_MAXPLAYERS];
+	char* str_board;
+	enum_game_t game = game_holdem;
+
+	int niter = 0, npockets, nboard, err, terse, orderflag = 0;
+	enum_sample_t enumType;
+	StdDeck_CardMask pockets[ENUM_MAXPLAYERS];
+	StdDeck_CardMask board;
+	StdDeck_CardMask dead;
+	enum_result_t result;
+	
+	StdDeck_CardMask_RESET(board);
+	StdDeck_CardMask_RESET(dead);
+	
+	str_board = RSTRING_PTR(r_board);
+	npockets = to_string_array(str_pockets, r_pockets);
+	printf("npockets=%d\n", npockets);
+	nboard = RSTRING_LEN(r_board)/2;
+
+	for(i = 0; i < npockets; i++) {
+		pockets[i] = TextToPokerEval(str_pockets[i]);
+	}
+	board = TextToPokerEval(str_board);
+
+	err = enumExhaustive(game, pockets,				   
+				   board, dead,
+				   npockets, nboard, orderflag,
+				   &result);
+	printf("poker source:\n\n");
+	enumResultPrint(&result, pockets, board);	
+	return NULL;
 }
 
 
