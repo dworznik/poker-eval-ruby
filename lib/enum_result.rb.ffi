@@ -1,0 +1,26 @@
+module FFIPokerEval
+    class EnumResult < FFI::Struct
+        @@@
+        struct do |s|
+            s.name 'enum_result_t'
+            s.include 'enumdefs.h'
+            s.field :game, :pointer
+            s.field :sampleType, :pointer
+            s.field :nsamples, :int
+            s.field :nplayers, :int
+            s.field :nwinhi, [:int, 12]
+            s.field :ntiehi, [:int, 12]
+            s.field :nlosehi, [:int, 12]
+            s.field :nwinlo, [:int, 12]
+            s.field :ntielo, [:int, 12]
+            s.field :nloselo, [:int, 12]
+            s.field :nscoop, [:int, 12]
+            s.field :nsharehi, :pointer
+            s.field :nsharelo, :pointer
+            s.field :nshare, :pointer
+            s.field :ev, [:double, 12]
+            s.field :ordering, :pointer
+        end
+        @@@
+    end
+end
