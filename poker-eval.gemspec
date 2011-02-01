@@ -1,5 +1,3 @@
-`tar --strip-components 1 -xkzvf sources/poker-eval-138.0.tar.gz -C ext/poker_eval`
-
 spec = Gem::Specification.new do |s|
   s.name = 'poker-eval'
   s.version = '0.0.2'
