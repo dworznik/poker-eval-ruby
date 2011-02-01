@@ -6,4 +6,4 @@ extension_name = 'extpokereval'
 # The destination
 dir_config(extension_name)
 
-puts `CC='gcc -fPIC' ./configure --prefix=#{Dir.pwd}/..`
+puts `CC='gcc -fPIC' ./configure --prefix=#{Dir.pwd}/../../lib/poker_eval`
