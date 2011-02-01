@@ -38,67 +38,6 @@ StdDeck_CardMask TextToPokerEval(const char* strHand)
 }
 
 
-void enumResultPrint(enum_result_t *result, StdDeck_CardMask pockets[],
-                StdDeck_CardMask board) {
-  int i;
-  enum_gameparams_t *gp;
-  int width;
-
-  gp = enumGameParams(result->game);
-  if (gp == NULL) {
-    printf("enumResultPrint: invalid game type\n");
-    return;
-  }
-  width = gp->maxpocket * 3 - 1;
-  printf("%s: %d %s %s%s", gp->name, result->nsamples,
-         (result->sampleType == ENUM_SAMPLE) ? "sampled" : "enumerated",
-         (gp->maxboard > 0) ? "board" : "outcome",
-         (result->nsamples == 1 ? "" : "s"));
-  if (!StdDeck_CardMask_IS_EMPTY(board))
-    printf(" containing %s", DmaskString(StdDeck, board));
-  printf("\n");
-
-  if (gp->haslopot && gp->hashipot) {
-    printf("%*s %7s   %7s %7s %7s   %7s %7s %7s   %5s\n",
-           -width, "cards", "scoop",
-           "HIwin", "HIlos", "HItie",
-           "LOwin", "LOlos", "LOtie",
-           "EV");
-    for (i=0; i<result->nplayers; i++) {
-      printf("%*s %7d   %7d %7d %7d   %7d %7d %7d   %5.3f\n",
-             -width, DmaskString(StdDeck, pockets[i]), result->nscoop[i],
-             result->nwinhi[i], result->nlosehi[i], result->ntiehi[i],
-             result->nwinlo[i], result->nloselo[i], result->ntielo[i],
-             result->ev[i] / result->nsamples);
-    }
-  } else {
-    printf("%*s %7s %6s   %7s %6s   %7s %6s     %5s\n",
-           -width, "cards", "win", "%win", "lose", "%lose", "tie", "%tie", "EV");
-    if (gp->haslopot) {
-      for (i=0; i<result->nplayers; i++) {
-        printf("%*s %7d %6.2f   %7d %6.2f   %7d %6.2f     %5.3f\n",
-               -width, DmaskString(StdDeck, pockets[i]),
-               result->nwinlo[i], 100.0 * result->nwinlo[i] / result->nsamples,
-               result->nloselo[i], 100.0 * result->nloselo[i] / result->nsamples,
-               result->ntielo[i], 100.0 * result->ntielo[i] / result->nsamples,
-               result->ev[i] / result->nsamples);
-      }
-    } else if (gp->hashipot) {
-      for (i=0; i<result->nplayers; i++) {
-        printf("%*s %7d %6.2f   %7d %6.2f   %7d %6.2f     %5.3f\n",
-               -width, DmaskString(StdDeck, pockets[i]),
-               result->nwinhi[i], 100.0 * result->nwinhi[i] / result->nsamples,
-               result->nlosehi[i], 100.0 * result->nlosehi[i] / result->nsamples,
-               result->ntiehi[i], 100.0 * result->ntiehi[i] / result->nsamples,
-               result->ev[i] / result->nsamples);
-      }
-    }
-  }
-
-  if (result->ordering != NULL)
-    enumResultPrintOrdering(result, 0);
-}
-
 int  eval_holdem(char* str_pockets[], int npockets, char* str_board, int nboard, enum_result_t* result) {
     int i, niter = 0, err, terse, orderflag = 0;
 
