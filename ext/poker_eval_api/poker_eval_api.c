@@ -38,7 +38,7 @@ StdDeck_CardMask TextToPokerEval(const char* strHand)
 }
 
 
-void enumResultPrint(enum_result_t *result, StdDeck_CardMask pockets[],
+void eenumResultPrint(enum_result_t *result, StdDeck_CardMask pockets[],
                 StdDeck_CardMask board) {
   int i;
   enum_gameparams_t *gp;
