@@ -5,9 +5,7 @@ require File.join(File.dirname(__FILE__), 'enum_result.rb')
 module FFIPokerEval
     extend FFI::Library
     begin
-        ffi_lib File.join(File.dirname(__FILE__), 'poker_eval_api.bundle')
-    rescue
-        ffi_lib File.join(File.dirname(__FILE__), 'poker_eval_api.so')
+        ffi_lib [File.join(File.dirname(__FILE__), '../ext/poker_eval_api/poker_eval_api.bundle'), File.join(File.dirname(__FILE__), '../ext/poker_eval_api/poker_eval_api.so')]
     end
     attach_function :eval_holdem, [:pointer, :int, :string, :int, :pointer], :int
     attach_function :create_enum_result, [], :pointer
