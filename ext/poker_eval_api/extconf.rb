@@ -2,7 +2,7 @@
 require 'mkmf'
 require 'rake'
 
-Rake::Task["ffi"].execute
+#Rake::Task["ffi_generate"].execute
 
 def link_static?
   res = `echo 'int main() { return 0; }' > conftest.c; #{link_command("-Wl,-Bstatic")} 2>&1 | grep -c 'unknown option: -Bstatic'`
