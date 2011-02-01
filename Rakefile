@@ -4,6 +4,7 @@ task :ffi_generate do
     require 'ffi/tools/generator'
     require 'ffi/tools/struct_generator'
 
+<<<<<<< HEAD
     module FFI
         class StructGenerator
             def generate_layout
@@ -26,6 +27,8 @@ task :ffi_generate do
     end
 
 
+=======
+>>>>>>> e42ead3192b84f6b90b86ba2a5fa67e33dac0d0a
     ffi_files = ["lib/enum_result.rb.ffi"]
     ffi_options = { :cflags => "-Iext/poker_eval/include" }
     ffi_files.each do |ffi_file|
