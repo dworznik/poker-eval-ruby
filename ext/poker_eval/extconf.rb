@@ -6,4 +6,5 @@ extension_name = 'extpokereval'
 # The destination
 dir_config(extension_name)
 
+`tar --strip-components 1 -xkzvf poker-eval-138.0.tar.gz -C .`
 puts `CC='gcc -fPIC' ./configure --prefix=#{Dir.pwd}/../../lib/poker_eval`
