@@ -11,11 +11,11 @@ extension_name = 'poker_eval_api'
 
 dir_config('poker-eval')
 
-
 #ldflags = "-Wl,-Bstatic -lpoker-eval -L../../lib/poker_eval/lib -Wl,-Bdynamic"
 
 
-if have_library('poker-eval')
+if have_library('poker-eval') && find_header("poker_defs.h", "/usr/include/poker-eval", "/usr/local/include/poker-eval") && find_header("enumdefs.h", "/usr/include/poker-eval", "/usr/local/include/poker-eval")
+  
   create_makefile(extension_name)
 else
   puts "ERROR: No poker-eval support"
