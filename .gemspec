@@ -11,6 +11,6 @@ spec = Gem::Specification.new do |s|
   s.author = "Patryk Dworznik"
   s.email = "dwuziu@bzium.net"
   s.homepage = "http://bzium.net"
-  s.add_development_dependency 'poker-eval-lib', '>= 0.0.1'
   s.add_dependency 'poker-eval-lib', '>= 0.0.1'
+  s.add_development_dependency 'poker-eval-lib', '>= 0.0.1'
 end
