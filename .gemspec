@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'poker-eval'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
   s.summary = "Ruby interface for poker-eval."
   s.description = %{Interface for poker-eval}
   s.files = Dir['lib/**/*.rb'] + Dir['ext/**/*']
